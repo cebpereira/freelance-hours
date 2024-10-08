@@ -1,0 +1,5 @@
+FROM dpage/pgadmin4:latest
+
+COPY ./servers.json /pgadmin4/servers.json
+
+EXPOSE 80

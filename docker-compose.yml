@@ -1,0 +1,54 @@
+services:
+  postgres:
+    build: ./docker/postgres/.
+    container_name: freelance-hours_db
+    image: freelance-hours-db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - freelance-hours-network
+
+  apache:
+    build: ./docker/apache/.
+    container_name: freelance-hours_site
+    image: freelance-hours-site
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html/freelance-hours
+    networks:
+      - freelance-hours-network
+    depends_on:
+      - postgres
+
+  pgadmin:
+    build: ./docker/pgadmin/.
+    container_name: freelance-hours_sgbd
+    image: freelance-hours-sgbd
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${SGBD_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${SGBD_PASS}
+    ports:
+      - 5050:80
+    volumes:
+      - sgbd-data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+    networks:
+      - freelance-hours-network
+    depends_on:
+      - postgres
+
+networks:
+  freelance-hours-network: {}
+
+volumes:
+  db-data: {}
+  sgbd-data: {}
