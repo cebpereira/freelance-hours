@@ -70,8 +70,7 @@ Construção de sistema web como parte do curso de PHP da Rocketseat.
     `composer install`
     `npm run build`
  
-* Ocorrendo os processo sem qualquer erro, a rota inicial do projeto é a localhost
-
+* Ao executar os comandos sem qualquer erro, a rota inicial do projeto será localhost
 
  
 > [!NOTE]
