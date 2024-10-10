@@ -2,12 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
  */
 class ProjectFactory extends Factory
 {
@@ -23,7 +22,7 @@ class ProjectFactory extends Factory
             'description' => htmlspecialchars(fake()->randomHtml()),
             'ends_at' => fake()->dateTimeBetween('now', '+3 days'),
             'status' => fake()->randomElement(['open', 'closed']),
-            'tech_stack' => fake()->randomElements(['React', 'Laravel', 'PHP', 'MySQL', 'Vue', 'Python', 'Java', 'Node', 'Angular', 'C++', 'C#', '.NET'], random_int(1, 5)),
+            'tech_stack' => fake()->randomElements(['nodejs', 'react', 'js', 'vite', 'nextjs'], random_int(1, 5)),
             'created_by' => User::factory(),
         ];
     }
